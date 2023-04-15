@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+/* IMPORTACIONES DE CHARTS */
 import { ChartData, ChartEvent, ChartType } from 'chart.js';
 
 @Component({
@@ -9,30 +11,45 @@ import { ChartData, ChartEvent, ChartType } from 'chart.js';
 })
 export class DonaComponent {
 
+  /* TITULO */
+  @Input('titulo') titulo: string = '';
+
+  /* LABELS */
+  @Input('labels') labels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+
+  /* DATA */
+  @Input('data') data: number[] = [350, 450, 100];
+
+  /*TIPO GRAFICO */
+  @Input('tipo') tipo: ChartType = 'doughnut';
+
   /* COLORES */
-  public backGroundColor: string[] = ['#6857E6', '#009FEE', '#F02059'];
+  @Input('colores') colores: string[] = ['#6857E6', '#009FEE', '#F02059'];
 
-  // Doughnut
-  public doughnutChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+  public doughnutChartType!: ChartType;
+  public doughnutChartData!: ChartData<'doughnut'>;
 
-  public doughnutChartData: ChartData<'doughnut'> = {
-    labels: this.doughnutChartLabels,
-    datasets: [
-      {
-        data: [350, 450, 100],
-        backgroundColor: this.backGroundColor
-      },
-    ],
+  ngOnInit() {
+    this.doughnutChartType = this.tipo;
+
+    /* DONA */
+    this.doughnutChartData = {
+      labels: this.labels,
+      datasets: [
+        {
+          data: this.data,
+          backgroundColor: this.colores
+        }
+      ]
+    };
   };
 
-  public doughnutChartType: ChartType = 'doughnut';
-
   // events
-  public chartClicked({ event, active }: { event: ChartEvent, active: {}[] }): void {
+  chartClicked({ event, active }: { event: ChartEvent, active: {}[] }): void {
     console.log(event, active);
   };
 
-  public chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {
+  chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {
     console.log(event, active);
   };
 
