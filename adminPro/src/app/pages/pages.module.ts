@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 /* COMPONENTES */
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -26,6 +27,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     SharedModule,
     RouterModule
   ],
