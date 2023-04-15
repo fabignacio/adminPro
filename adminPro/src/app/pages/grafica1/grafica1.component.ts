@@ -10,7 +10,7 @@ export class Grafica1Component {
 
   labels1: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
   labels2: string[] = ['Marzo', 'Abril', 'Mayo'];
-  labels3: string[] = ['The Last Of Us', 'The Last Of Us', 'God Of War Ragnarok'];
+  labels3: string[] = ['The Last Of Us', 'The Last Of Us 2', 'God Of War Ragnarok'];
   labels4: string[] = ['Junio', 'Julio', 'Agosto'];
 
   data1: number[] = [350, 450, 100];
