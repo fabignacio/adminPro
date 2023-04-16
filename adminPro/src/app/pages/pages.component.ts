@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+/*SERVICIO */
+import { SettingsService } from '../services/settings.service';
+
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
@@ -8,14 +11,6 @@ import { Component } from '@angular/core';
 })
 export class PagesComponent {
 
-  linkTheme = document.querySelector('#theme');
-  defaultTheme: string = './assets/css/colors/default.css';
-
-  ngOnInit() {
-
-    const url = localStorage.getItem('theme');
-
-    url ? this.linkTheme?.setAttribute('href', url) : this.linkTheme?.setAttribute('href', this.defaultTheme);
-  }
+  constructor(private settingService: SettingsService) { }
 
 }

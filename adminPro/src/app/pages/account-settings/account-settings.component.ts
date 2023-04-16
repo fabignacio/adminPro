@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+/*SERVICIO */
+import { SettingsService } from './../../services/settings.service';
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',
@@ -8,14 +10,10 @@ import { Component } from '@angular/core';
 })
 export class AccountSettingsComponent {
 
-  linkTheme = document.querySelector('#theme');
+  constructor(private settingService: SettingsService) { }
 
-  changeTheme = (tema: string) => {
+  ngOnInit() { this.settingService.checkCurrentTheme(); };
 
-    const url = `./assets/css/colors/${tema}.css`
+  changeTheme = (tema: string) => { this.settingService.changeTheme(tema); };
 
-    this.linkTheme?.setAttribute('href', url);
-    localStorage.setItem('theme', url);
-  };
-
-}
+};
