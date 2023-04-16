@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-
 /* MODULOS PERSONALIZADOS */
 import { ComponentsModule } from '../components/components.module';
 import { SharedModule } from '../shared/shared.module';

@@ -16,6 +16,7 @@ const routes: Routes = [
             { path: 'account-settings', component: AccountSettingsComponent },
             { path: 'progress', component: ProgressComponent },
             { path: 'grafica1', component: Grafica1Component },
+            { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     },
 ];
