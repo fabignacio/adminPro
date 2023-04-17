@@ -4,7 +4,8 @@ import {
   retry,
   interval,
   take,
-  map
+  map,
+  filter
 } from 'rxjs';
 
 @Component({
@@ -47,8 +48,9 @@ export class RxjsComponent {
 
     return interval(1000)
       .pipe(
-        take(4),
-        map(valor => valor + 1)
+        map(valor => valor + 1),
+        filter(valor => (valor % 2 == 0 ? true : false)),
+        take(10),
       );
 
   };
