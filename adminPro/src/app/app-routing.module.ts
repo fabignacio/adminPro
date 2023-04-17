@@ -3,25 +3,25 @@ import { Routes, RouterModule } from '@angular/router';
 
 /* MODULOS RUTAS HIJAS*/
 import { AuthRouterModule } from './auth/auth.routing';
+import { PagesRoutingModule } from './pages/pages.routing';
 
 /* COMPONENTES */
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
 
 const routes: Routes = [
 
   //path: '/dashboard' PagesRouting
   //path: '/auth AuthRouting
-  {
-    path: 'dashboard',
-    loadChildren: () => import('./pages/pages.module').then(d => d.PagesModule)
-  },
+  { path: '', component: DashboardComponent },
   { path: '**', component: NopagefoundComponent },
 ]
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    AuthRouterModule,
+    PagesRoutingModule,
+    AuthRouterModule
   ],
   exports: [RouterModule]
 })
