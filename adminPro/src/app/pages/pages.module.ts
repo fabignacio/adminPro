@@ -13,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { ProgressComponent } from './progress/progress.component';
+import { PromesasComponent } from './promesas/promesas.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ProgressComponent } from './progress/progress.component';
     Grafica1Component,
     ProgressComponent,
     PagesComponent,
+    PromesasComponent,
   ],
   exports: [
     AccountSettingsComponent,
