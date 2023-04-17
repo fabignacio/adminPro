@@ -5,7 +5,8 @@ import {
   interval,
   take,
   map,
-  filter
+  filter,
+  Subscription
 } from 'rxjs';
 
 @Component({
@@ -15,6 +16,8 @@ import {
   ]
 })
 export class RxjsComponent {
+
+  public intervalSubs: Subscription;
 
   constructor() {
 
@@ -32,27 +35,25 @@ export class RxjsComponent {
     //     }
     //   );
 
-    this.retornaIntervalo().subscribe(
+    this.intervalSubs = this.retornaIntervalo().subscribe(
       {
         next: console.log
       }
-    )
-
+    );
   };
 
-  ngOnInit(): void {
-
-  };
+  ngOnDestroy(): void {
+    this.intervalSubs.unsubscribe();
+  }
 
   retornaIntervalo = (): Observable<number> => {
 
-    return interval(1000)
+    return interval(100)
       .pipe(
         map(valor => valor + 1),
         filter(valor => (valor % 2 == 0 ? true : false)),
-        take(10),
+        //take(10),
       );
-
   };
 
   retornaObservable = (): Observable<number> => {
