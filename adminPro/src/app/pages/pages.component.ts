@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 declare function customInitFunctions(): void;
 
 /*SERVICIO */
-import { SettingsService } from '../services/settings.service';
+import { SettingsService } from '../services/setting/settings.service';
 
 @Component({
   selector: 'app-pages',
