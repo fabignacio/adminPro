@@ -5,6 +5,9 @@ import { Observable, catchError, map, of, tap } from 'rxjs';
 /*INTERFACE */
 import { LoginForm } from '../../../interfaces/usuario/login-form.interface';
 
+/* MODELO */
+import { Usuario } from './../../../models/usuarios/usuario.model';
+
 /* ENVIROMENT */
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
@@ -15,6 +18,8 @@ const baseUrl: string = `${environment.URL_BACKEND_LOGIN}`;
   providedIn: 'root'
 })
 export class LoginService {
+
+  public usuario!: Usuario;
 
   constructor(
     private http: HttpClient,
@@ -60,8 +65,13 @@ export class LoginService {
       }
     })
       .pipe(
-        tap((resp: any) => { sessionStorage.setItem('token', resp.token); }),
-        map(resp => true),
+        map((resp: any) => {
+          const { nombre, email, estado, img = '', google, role, uid } = resp.usuario
+
+          this.usuario = new Usuario(nombre, email, estado, '', img, google, role, uid);
+          sessionStorage.setItem('token', resp.token);
+          return true;
+        }),
         catchError((err: any) => of(false))
       );
   };

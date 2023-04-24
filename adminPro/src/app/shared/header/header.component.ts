@@ -6,6 +6,9 @@ declare const google: any;
 /* SERVICIO */
 import { LoginService } from '../../services/auth/login/login.service';
 
+/* MODELO */
+import { Usuario } from './../../models/usuarios/usuario.model';
+
 /* VARIABLES DE ENTORNO */
 import { environment } from './../../../environments/environment';
 
@@ -17,9 +20,13 @@ import { environment } from './../../../environments/environment';
 })
 export class HeaderComponent {
 
-  constructor(private loginService: LoginService) { }
 
   private readonly _client_id: string = environment.CLIENT_ID;
+  public usuario: Usuario;
+
+  constructor(private loginS: LoginService) {
+    this.usuario = loginS.usuario;
+  };
 
   logout() {
 
@@ -27,7 +34,7 @@ export class HeaderComponent {
       client_id: this._client_id
     });
 
-    this.loginService.logout(google);
+    this.loginS.logout(google);
   };
 
 };

@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 
-/*SERVICIO */
+/* SERVICIOS */
 import { SidebarService } from '../../services/sidebar/sidebar.service';
+import { LoginService } from './../../services/auth/login/login.service';
+
+/* MODELO */
+import { Usuario } from './../../models/usuarios/usuario.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,8 +15,15 @@ import { SidebarService } from '../../services/sidebar/sidebar.service';
 })
 export class SidebarComponent {
 
-  menuItems: any[] = [];
+  public menuItems: any[] = [];
+  public usuario: Usuario;
 
-  constructor(private sideBarSevice: SidebarService) { this.menuItems = sideBarSevice.menu; }
+  constructor(
+    private sideBarSevice: SidebarService,
+    private loginS: LoginService
+  ) {
+    this.menuItems = sideBarSevice.menu;
+    this.usuario = loginS.usuario;
+  };
 
-}
+};
