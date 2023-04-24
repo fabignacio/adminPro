@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 
 /*INTERFACE */
@@ -7,6 +7,7 @@ import { LoginForm } from '../../../interfaces/usuario/login-form.interface';
 
 /* ENVIROMENT */
 import { environment } from '../../../../environments/environment';
+import { Router } from '@angular/router';
 
 const baseUrl: string = `${environment.URL_BACKEND_LOGIN}`;
 
@@ -15,7 +16,25 @@ const baseUrl: string = `${environment.URL_BACKEND_LOGIN}`;
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private ngZone: NgZone
+  ) { };
+
+  googleInit(google?: any) {
+    this.logout(google)
+  };
+
+  logout(google: any) {
+    sessionStorage.removeItem('token');
+
+    google.accounts.id.revoke('fa.alarconm@duocuc.cl', (done: any) => {
+      this.ngZone.run(() => {
+        this.router.navigateByUrl('/login');
+      });
+    });
+  };
 
   login = (formData: LoginForm) => {
     return this.http.post(baseUrl, formData)

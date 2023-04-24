@@ -1,7 +1,7 @@
 import {
   Component,
-  AfterViewInit,
   ViewChild,
+  AfterViewInit,
   ElementRef,
   NgZone
 } from '@angular/core';
@@ -19,6 +19,9 @@ import { LoginService } from '../../services/auth/login/login.service';
 /*INTERFACE */
 import { LoginForm } from '../../interfaces/usuario/login-form.interface';
 
+/* VARIABLES DE ENTORNO */
+import { environment } from './../../../environments/environment';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -29,6 +32,8 @@ export class LoginComponent implements AfterViewInit {
   @ViewChild('googleBtn') googleBtn!: ElementRef;
 
   public formSubmitted: boolean = false;
+  public auth2: any;
+  private readonly _client_id: string = environment.CLIENT_ID;
 
   public loginForm = this.fb.group({
     email: [localStorage.getItem('email') || '', [Validators.required, Validators.pattern(this.vs.emailPattern)]],
@@ -45,13 +50,13 @@ export class LoginComponent implements AfterViewInit {
   ) { };
 
   ngAfterViewInit(): void {
-    this.googleInit();
+    this.renderButton();
   };
 
-  googleInit = () => {
+  renderButton() {
 
     google.accounts.id.initialize({
-      client_id: '796164393396-b51ocqg5qpqdfrg9ndcccctidnqrfdjr.apps.googleusercontent.com',
+      client_id: this._client_id,
       callback: (response: any) => this.handleCredentialResponse(response)
     });
 
@@ -59,6 +64,8 @@ export class LoginComponent implements AfterViewInit {
       this.googleBtn.nativeElement,
       { theme: "outline", size: "large" }  // customization attributes
     );
+
+    this.loginS.googleInit(google);
   };
 
   handleCredentialResponse = (response: any) => {
@@ -77,22 +84,22 @@ export class LoginComponent implements AfterViewInit {
       )
   };
 
-  login = () => {
+  login() {
 
     this.loginS.login((this.loginForm.value as LoginForm))
       .subscribe({
         next: (resp) => {
-
           if (this.loginForm.get('remember')?.value) {
-            localStorage.setItem('email', this.loginForm.get('email')?.value!);
+            localStorage.setItem('email', this.loginForm.get('email')?.value || '');
           } else {
             localStorage.removeItem('email');
-          };
+          }
+
+          // Navegar al Dashboard
           this.router.navigateByUrl('/');
         },
-        error: (err) => {
-          Swal.fire('Error', err.error.msg, 'error');
-        }
+        error: (err: any) => { Swal.fire('Error', err.error.msg, 'error'); }
       });
   };
+
 };
