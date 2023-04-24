@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  NgZone
+} from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+/* GOOGLE */
+declare const google: any;
+
 /* SERVICIOS */
 import { ValidatorsService } from './../../services/validators/validators.service';
-import { UsuarioService } from '../../services/usuario/usuario.service';
+import { LoginService } from '../../services/auth/login/login.service';
 
 /*INTERFACE */
 import { LoginForm } from '../../interfaces/usuario/login-form.interface';
@@ -15,7 +24,9 @@ import { LoginForm } from '../../interfaces/usuario/login-form.interface';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
+
+  @ViewChild('googleBtn') googleBtn!: ElementRef;
 
   public formSubmitted: boolean = false;
 
@@ -29,22 +40,55 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private vs: ValidatorsService,
-    private usuario: UsuarioService
-  ) { }
+    private loginS: LoginService,
+    private ngZone: NgZone
+  ) { };
+
+  ngAfterViewInit(): void {
+    this.googleInit();
+  };
+
+  googleInit = () => {
+
+    google.accounts.id.initialize({
+      client_id: '796164393396-b51ocqg5qpqdfrg9ndcccctidnqrfdjr.apps.googleusercontent.com',
+      callback: (response: any) => this.handleCredentialResponse(response)
+    });
+
+    google.accounts.id.renderButton(
+      this.googleBtn.nativeElement,
+      { theme: "outline", size: "large" }  // customization attributes
+    );
+  };
+
+  handleCredentialResponse = (response: any) => {
+    this.loginS.loginGoogle(response.credential)
+      .subscribe(
+        {
+          next: (resp) => {
+
+            this.ngZone.run(() => {
+              this.router.navigateByUrl('/');
+            });
+
+          },
+          error: (err) => { Swal.fire('Error', err.error.msg, 'error') }
+        }
+      )
+  };
 
   login = () => {
 
-    this.usuario.login((this.loginForm.value as LoginForm))
+    this.loginS.login((this.loginForm.value as LoginForm))
       .subscribe({
         next: (resp) => {
-          console.log(resp)
 
           if (this.loginForm.get('remember')?.value) {
             localStorage.setItem('email', this.loginForm.get('email')?.value!);
           } else {
             localStorage.removeItem('email');
           };
-
+          this.router.navigateByUrl('/');
         },
         error: (err) => {
           Swal.fire('Error', err.error.msg, 'error');

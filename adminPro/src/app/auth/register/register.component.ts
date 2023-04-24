@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+/* SweetAlert */
 import Swal from 'sweetalert2';
 
 /* SERVICIOS */
@@ -28,11 +31,11 @@ export class RegisterComponent {
     terminos: [true, Validators.required],
   }, {
     validators: this.vs.validarPassword
-  }
-  );
+  });
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private vs: ValidatorsService,
     private usuario: UsuarioService
   ) { };
@@ -47,7 +50,7 @@ export class RegisterComponent {
 
     this.usuario.crearUsuario((this.registerForm.value as RegisterForm))
       .subscribe({
-        next: (resp) => { console.log('Usuario Creado'); console.log(resp); },
+        next: (resp) => { this.router.navigateByUrl('/'); },
         error: (err) => {
           /* SI SUCEDE UN ERROR */
           Swal.fire('Error', err.error.msg, 'error');
