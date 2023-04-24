@@ -4,4 +4,4 @@ export interface RegisterForm {
     password: string | null,
     password2: string | null,
     terminos: boolean | null
-}
+};
