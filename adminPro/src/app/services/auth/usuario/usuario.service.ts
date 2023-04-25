@@ -4,20 +4,22 @@ import { Observable, catchError, map, of, tap } from 'rxjs';
 
 /*INTERFACE */
 import { LoginForm } from '../../../interfaces/usuario/login-form.interface';
+import { RegisterForm } from './../../../interfaces/usuario/register-form.interface';
 
 /* MODELO */
-import { Usuario } from './../../../models/usuarios/usuario.model';
+import { Usuario } from '../../../models/usuarios/usuario.model';
 
 /* ENVIROMENT */
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 
-const baseUrl: string = `${environment.URL_BACKEND_LOGIN}`;
+const baseUrl: string = environment.URL_BACKEND_LOGIN;
+const baseUrlU: string = environment.URL_BACKEND_USUARIO;
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class UsuarioService {
 
   public usuario!: Usuario;
 
@@ -26,6 +28,14 @@ export class LoginService {
     private router: Router,
     private ngZone: NgZone
   ) { };
+
+  get token(): string {
+    return sessionStorage.getItem('token') || '';
+  };
+
+  get uid(): string {
+    return this.usuario.uid || '';
+  };
 
   googleInit(google?: any) {
     this.logout(google)
@@ -57,11 +67,9 @@ export class LoginService {
 
   validarToken = (): Observable<boolean> => {
 
-    const token = sessionStorage.getItem('token') || '';
-
     return this.http.get(`${baseUrl}/renew`, {
       headers: {
-        'x-token': token
+        'x-token': this.token
       }
     })
       .pipe(
@@ -74,6 +82,17 @@ export class LoginService {
         }),
         catchError((err: any) => of(false))
       );
+  };
+
+  crearUsuario = (formData: RegisterForm) => {
+    return this.http.post(baseUrlU, formData)
+      .pipe((
+        tap((resp: any) => { sessionStorage.setItem('token', resp.token); }) /* GUARDAMOS EL TOKEN EN EL SESSION STORAGE */
+      ));
+  };
+
+  actualizarPerfil = (data: { email: string, nombre: string }) => {
+    return this.http.put(`${baseUrlU}/${this.uid}`, data, { headers: { 'x-token': this.token } });
   };
 
 };

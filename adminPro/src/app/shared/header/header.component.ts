@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 declare const google: any;
 
 /* SERVICIO */
-import { LoginService } from '../../services/auth/login/login.service';
+import { UsuarioService } from '../../services/auth/usuario/usuario.service';
 
 /* MODELO */
 import { Usuario } from './../../models/usuarios/usuario.model';
@@ -24,7 +24,7 @@ export class HeaderComponent {
   private readonly _client_id: string = environment.CLIENT_ID;
   public usuario: Usuario;
 
-  constructor(private loginS: LoginService) {
+  constructor(private loginS: UsuarioService) {
     this.usuario = loginS.usuario;
   };
 

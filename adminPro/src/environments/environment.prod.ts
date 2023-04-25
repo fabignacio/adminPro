@@ -3,7 +3,7 @@ export const environment = {
 
     /*URL'S*/
     URL_API_PRUEBA: 'https://reqres.in/api/users?page=2',
-    URL_BACKEND: 'http://localhost:3000/api',
+    URL_BACKEND_USUARIO: 'http://localhost:3000/api/usuarios',
     URL_BACKEND_LOGIN: 'http://localhost:3000/api/login/',
     URL_BACKEND_IMG: 'http://localhost:3000/api/upload/',
 

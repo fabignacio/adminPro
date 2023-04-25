@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 /* SERVICIOS */
 import { SidebarService } from '../../services/sidebar/sidebar.service';
-import { LoginService } from './../../services/auth/login/login.service';
+import { UsuarioService } from './../../services/auth/usuario/usuario.service';
 
 /* MODELO */
 import { Usuario } from './../../models/usuarios/usuario.model';
@@ -20,7 +20,7 @@ export class SidebarComponent {
 
   constructor(
     private sideBarSevice: SidebarService,
-    private loginS: LoginService
+    private loginS: UsuarioService
   ) {
     this.menuItems = sideBarSevice.menu;
     this.usuario = loginS.usuario;

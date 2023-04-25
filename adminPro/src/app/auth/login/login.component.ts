@@ -14,7 +14,7 @@ declare const google: any;
 
 /* SERVICIOS */
 import { ValidatorsService } from './../../services/validators/validators.service';
-import { LoginService } from '../../services/auth/login/login.service';
+import { UsuarioService } from '../../services/auth/usuario/usuario.service';
 
 /*INTERFACE */
 import { LoginForm } from '../../interfaces/usuario/login-form.interface';
@@ -45,7 +45,7 @@ export class LoginComponent implements AfterViewInit {
     private router: Router,
     private fb: FormBuilder,
     private vs: ValidatorsService,
-    private loginS: LoginService,
+    private loginS: UsuarioService,
     private ngZone: NgZone
   ) { };
 
