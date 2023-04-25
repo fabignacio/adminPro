@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 /*SERVICIO */
-import { SettingsService } from '../../services/setting/settings.service';
+import { SettingsService } from '../../../services/setting/settings.service';
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',

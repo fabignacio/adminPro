@@ -4,12 +4,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 /* SERVICIOS */
-import { ValidatorsService } from './../../services/validators/validators.service';
-import { UsuarioService } from './../../services/auth/usuario/usuario.service';
-import { FileUploadService } from '../../services/file-upload/file-upload.service';
+import { ValidatorsService } from '../../../../services/validators/validators.service';
+import { UsuarioService } from '../../../../services/auth/usuario/usuario.service';
+import { FileUploadService } from '../../../../services/file-upload/file-upload.service';
 
 /* MODELOS */
-import { Usuario } from '../../models/usuarios/usuario.model';
+import { Usuario } from '../../../../models/usuarios/usuario.model';
 
 @Component({
   selector: 'app-perfil',

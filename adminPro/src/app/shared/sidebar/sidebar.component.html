@@ -1,5 +1,3 @@
-<!-- Left Sidebar - style you can find in sidebar.scss  -->
-<!-- ============================================================== -->
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
     <div class="scroll-sidebar">
@@ -25,8 +23,8 @@
 
                 <li *ngFor="let item of menuItems">
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                        <i class="mdi mdi-gauge"></i>
-                        <span class="hide-menu">
+                        <i [class]="item.icono"></i>
+                        <span class=" hide-menu">
                             {{item.titulo}}
 
                             <span class="label label-rouded label-themecolor pull-right">
@@ -49,5 +47,3 @@
     </div>
     <!-- End Sidebar scroll-->
 </aside>
-<!-- ============================================================== -->
-<!-- End Left Sidebar - style you can find in sidebar.scss  -->

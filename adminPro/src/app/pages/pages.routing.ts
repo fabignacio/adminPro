@@ -4,14 +4,18 @@ import { NgModule } from '@angular/core';
 /*SERVICIO GUARD */
 import { AuthGuard } from '../services/auth/guards/auth.guard';
 
-import { AccountSettingsComponent } from './account-settings/account-settings.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { Grafica1Component } from './grafica1/grafica1.component';
+/* COMPONENTES DASHBOARD */
+import { AccountSettingsComponent } from './menu/account-settings/account-settings.component';
+import { DashboardComponent } from './menu/dashboard/dashboard.component';
+import { Grafica1Component } from './menu/grafica1/grafica1.component';
 import { PagesComponent } from './pages.component';
-import { PerfilComponent } from './perfil/perfil.component';
-import { ProgressComponent } from './progress/progress.component';
-import { PromesasComponent } from './promesas/promesas.component';
-import { RxjsComponent } from './rxjs/rxjs.component';
+import { PerfilComponent } from './mantenimiento/usuario/perfil/perfil.component';
+import { ProgressComponent } from './menu/progress/progress.component';
+import { PromesasComponent } from './menu/promesas/promesas.component';
+import { RxjsComponent } from './menu/rxjs/rxjs.component';
+
+/* COMPONENTES MANTENIMIENTO */
+import { UsuariosComponent } from './mantenimiento/usuario/usuarios/usuarios.component';
 
 const routes: Routes = [
     {
@@ -19,6 +23,8 @@ const routes: Routes = [
         component: PagesComponent,
         canActivate: [AuthGuard],
         children: [
+
+            /* MENU DASHBOARD */
             { path: '', component: DashboardComponent, data: { titulo: 'Dashboard' } },
             { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes de cuenta' } },
             { path: 'grafica1', component: Grafica1Component, data: { titulo: 'Graficas' } },
@@ -26,7 +32,10 @@ const routes: Routes = [
             { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress Bar' } },
             { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
             { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Rxjs' } },
-            { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+            { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+
+            /* MANTENIMIENTO */
+            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios' } },
         ]
     },
 ];

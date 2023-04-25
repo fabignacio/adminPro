@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 /*VARIABLES DE ENTORNO */
-import { environment } from './../../../environments/environment';
+import { environment } from './../../../../environments/environment';
 
 
 @Component({

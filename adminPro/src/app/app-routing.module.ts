@@ -6,7 +6,7 @@ import { AuthRouterModule } from './auth/auth.routing';
 import { PagesRoutingModule } from './pages/pages.routing';
 
 /* COMPONENTES */
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DashboardComponent } from './pages/menu/dashboard/dashboard.component';
 import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
 
 const routes: Routes = [
