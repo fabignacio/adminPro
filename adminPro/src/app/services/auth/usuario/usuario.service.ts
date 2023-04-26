@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
-import { Observable, catchError, map, of, tap } from 'rxjs';
+import { Observable, catchError, delay, map, of, tap } from 'rxjs';
 
 /*INTERFACE */
 import { LoginForm } from '../../../interfaces/usuario/login-form.interface';
@@ -44,7 +44,7 @@ export class UsuarioService {
         'x-token': this.token
       }
     };
-  }
+  };
 
   googleInit(google?: any) {
     this.logout(google)

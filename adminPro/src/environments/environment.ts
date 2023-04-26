@@ -6,6 +6,7 @@ export const environment = {
     URL_BACKEND_USUARIO: 'http://localhost:3000/api/usuarios',
     URL_BACKEND_LOGIN: 'http://localhost:3000/api/login/',
     URL_BACKEND_IMG: 'http://localhost:3000/api/upload',
+    URL_BACKEND_BUSQUEDA: 'http://localhost:3000/api/todo',
 
     /*GOOGLE*/
     CLIENT_ID: '796164393396-b51ocqg5qpqdfrg9ndcccctidnqrfdjr.apps.googleusercontent.com'
