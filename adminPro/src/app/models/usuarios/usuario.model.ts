@@ -16,14 +16,19 @@ export class Usuario {
     ) { };
 
     get imagenUrl() {
-        if (this.img?.includes('https')) {
-            return this.img;
-        };
 
-        if (this.img) {
+        if (!this.img) {
+            return `${this._baseUrl}/usuarios/no-image`;
+        } else if (this.img) {
+
+            if (this.img?.includes('https')) { return this.img; };
+
             return `${this._baseUrl}/usuarios/${this.img}`;
+
         } else {
             return `${this._baseUrl}/usuarios/no-image`;
-        };
+        };;
+
+
     };
 };

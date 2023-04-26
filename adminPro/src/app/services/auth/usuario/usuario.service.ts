@@ -5,6 +5,7 @@ import { Observable, catchError, map, of, tap } from 'rxjs';
 /*INTERFACE */
 import { LoginForm } from '../../../interfaces/usuario/login-form.interface';
 import { RegisterForm } from './../../../interfaces/usuario/register-form.interface';
+import { CargarUsuario } from './../../../interfaces/usuario/cargar-usuario.interface';
 
 /* MODELO */
 import { Usuario } from '../../../models/usuarios/usuario.model';
@@ -36,6 +37,14 @@ export class UsuarioService {
   get uid(): string {
     return this.usuario.uid || '';
   };
+
+  get headers() {
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    };
+  }
 
   googleInit(google?: any) {
     this.logout(google)
@@ -92,7 +101,28 @@ export class UsuarioService {
   };
 
   actualizarPerfil = (data: { email: string, nombre: string }) => {
-    return this.http.put(`${baseUrlU}/${this.uid}`, data, { headers: { 'x-token': this.token } });
+    return this.http.put(`${baseUrlU}/${this.uid}`, data, this.headers);
+  };
+
+  cargarUsuario = (desde: number = 0) => {
+    /* baseUrlU */
+    /* localhost:3000/api/usuarios/?desde=0 */
+    const url = `${baseUrlU}/?desde=${desde}`
+
+    return this.http.get<CargarUsuario>(url, this.headers)
+      .pipe(
+        map(resp => {
+          const usuarios = resp.usuarios.map(user => new Usuario(
+            user.nombre, user.email, user.estado, '', user.img, user.google, user.role, user.uid
+          ));
+
+          return {
+            total: resp.totalRegistros,
+            usuarios
+          };
+        })
+      )
+
   };
 
 };

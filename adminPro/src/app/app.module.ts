@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 /* MODULO RUTAS */
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,7 @@ import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component'
     NopagefoundComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AuthModule,
     AppRoutingModule,

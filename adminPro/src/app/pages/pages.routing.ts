@@ -9,13 +9,13 @@ import { AccountSettingsComponent } from './menu/account-settings/account-settin
 import { DashboardComponent } from './menu/dashboard/dashboard.component';
 import { Grafica1Component } from './menu/grafica1/grafica1.component';
 import { PagesComponent } from './pages.component';
-import { PerfilComponent } from './mantenimiento/usuario/perfil/perfil.component';
 import { ProgressComponent } from './menu/progress/progress.component';
 import { PromesasComponent } from './menu/promesas/promesas.component';
 import { RxjsComponent } from './menu/rxjs/rxjs.component';
 
 /* COMPONENTES MANTENIMIENTO */
 import { UsuariosComponent } from './mantenimiento/usuario/usuarios/usuarios.component';
+import { PerfilComponent } from './mantenimiento/usuario/perfil/perfil.component';
 
 const routes: Routes = [
     {
@@ -28,14 +28,14 @@ const routes: Routes = [
             { path: '', component: DashboardComponent, data: { titulo: 'Dashboard' } },
             { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes de cuenta' } },
             { path: 'grafica1', component: Grafica1Component, data: { titulo: 'Graficas' } },
-            { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de Usuario' } },
             { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress Bar' } },
             { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
             { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Rxjs' } },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 
             /* MANTENIMIENTO */
-            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios' } },
+            { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de Usuario' } },
+            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios de Aplicacion' } },
         ]
     },
 ];
