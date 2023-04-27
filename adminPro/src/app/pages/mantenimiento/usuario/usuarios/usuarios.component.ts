@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 
 /* SERVICIOS */
 import { BusquedaService } from '../../../../services/busquedas/busqueda.service';
+import { ModalImagenService } from '../../../../services/modalImagen/modal-imagen.service';
 import { UsuarioService } from '../../../../services/auth/usuario/usuario.service';
 
 /* MODELO */
@@ -24,6 +25,7 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     private busquedaService: BusquedaService,
+    private modalS: ModalImagenService,
     private usuarioS: UsuarioService
   ) { };
 
@@ -114,6 +116,11 @@ export class UsuariosComponent implements OnInit {
       .subscribe({
         next: (resp: any) => console.log(resp)
       })
+  };
+
+  /* METODO PARA MOSTRAR EL MODAL */
+  abrirModal = (usuario: Usuario) => {
+    this.modalS.abrirModal();
   };
 
 };
