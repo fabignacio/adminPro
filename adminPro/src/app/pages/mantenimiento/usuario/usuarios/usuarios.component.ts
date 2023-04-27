@@ -32,6 +32,20 @@ export class UsuariosComponent implements OnInit {
     this.cargarUsuario();
   };
 
+  cambiarPagina = (valor: number) => {
+    this.desde += valor;
+
+    if (this.desde < 0) {
+      this.desde = 0;
+    } else if (this.desde > this.totalUsuarios) {
+      this.desde -= valor;
+    };
+
+    this.cargarUsuario();
+  };
+
+  /* METODOS QUE INVOLUCRAN AL SERVICIO */
+
   cargarUsuario = () => {
 
     this.cargando = true;
@@ -49,18 +63,6 @@ export class UsuariosComponent implements OnInit {
           this.cargando = false;
         }
       });
-  };
-
-  cambiarPagina = (valor: number) => {
-    this.desde += valor;
-
-    if (this.desde < 0) {
-      this.desde = 0;
-    } else if (this.desde > this.totalUsuarios) {
-      this.desde -= valor;
-    };
-
-    this.cargarUsuario();
   };
 
   buscar = (termino: string) => {
@@ -105,6 +107,13 @@ export class UsuariosComponent implements OnInit {
       };
     });
     return;
+  };
+
+  cambiarRole = (usuario: Usuario) => {
+    this.usuarioS.actualizarRole(usuario)
+      .subscribe({
+        next: (resp: any) => console.log(resp)
+      })
   };
 
 };

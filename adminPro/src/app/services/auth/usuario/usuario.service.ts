@@ -100,7 +100,7 @@ export class UsuarioService {
       ));
   };
 
-  actualizarPerfil = (data: { email: string, nombre: string }) => {
+  actualizarPerfil = (data: { email: string, nombre: string, role: string }) => {
     return this.http.put(`${baseUrlU}/${this.uid}`, data, this.headers);
   };
 
@@ -128,6 +128,11 @@ export class UsuarioService {
 
     const url = `${baseUrlU}/${uid}`;
     return this.http.delete(url, this.headers);
+
+  };
+
+  actualizarRole = (usuario: Usuario) => {
+    return this.http.put(`${baseUrlU}/${usuario.uid}`, usuario, this.headers);
   };
 
 };
