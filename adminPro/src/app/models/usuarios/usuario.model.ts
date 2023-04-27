@@ -26,9 +26,7 @@ export class Usuario {
             return `${this._baseUrl}/usuarios/${this.img}`;
 
         } else {
-            return `${this._baseUrl}/usuarios/no-image`;
-        };;
-
-
+            return;
+        };
     };
 };

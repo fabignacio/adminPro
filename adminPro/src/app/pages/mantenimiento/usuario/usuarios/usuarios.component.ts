@@ -25,13 +25,15 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     private busquedaService: BusquedaService,
-    private modalS: ModalImagenService,
+    private modalService: ModalImagenService,
     private usuarioS: UsuarioService
   ) { };
 
 
   ngOnInit(): void {
     this.cargarUsuario();
+
+    this.modalService.nuevaImagen.subscribe(img => this.cargarUsuario());
   };
 
   cambiarPagina = (valor: number) => {
@@ -120,7 +122,10 @@ export class UsuariosComponent implements OnInit {
 
   /* METODO PARA MOSTRAR EL MODAL */
   abrirModal = (usuario: Usuario) => {
-    this.modalS.abrirModal();
+    const uid: string = usuario.uid || '';
+    const img: string = usuario.img || '';
+
+    this.modalService.abrirModal('usuarios', uid, img);
   };
 
 };
