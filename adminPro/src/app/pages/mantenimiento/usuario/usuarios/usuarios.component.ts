@@ -110,7 +110,7 @@ export class UsuariosComponent implements OnInit {
           });
       };
     });
-    return;
+    return true;
   };
 
   cambiarRole = (usuario: Usuario) => {
