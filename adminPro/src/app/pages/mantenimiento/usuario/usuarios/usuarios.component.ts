@@ -77,6 +77,9 @@ export class UsuariosComponent implements OnInit {
   };
 
   eliminarUsuario = (usuario: Usuario) => {
+
+    if (usuario.uid === this.usuarioS.uid) { return Swal.fire('Error', 'No puede borrase a si mismo') };
+
     Swal.fire({
       title: `¿Está seguro de borrar a ${usuario.nombre}? `,
       text: "No podrá revertir esta acción",
@@ -101,6 +104,7 @@ export class UsuariosComponent implements OnInit {
           });
       };
     });
+    return;
   };
 
 };
