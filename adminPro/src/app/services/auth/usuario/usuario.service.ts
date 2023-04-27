@@ -105,9 +105,8 @@ export class UsuarioService {
   };
 
   cargarUsuario = (desde: number = 0) => {
-    /* baseUrlU */
-    /* localhost:3000/api/usuarios/?desde=0 */
-    const url = `${baseUrlU}/?desde=${desde}`
+
+    const url = `${baseUrlU}/activos/?desde=${desde}`
 
     return this.http.get<CargarUsuario>(url, this.headers)
       .pipe(
@@ -117,12 +116,18 @@ export class UsuarioService {
           ));
 
           return {
-            total: resp.totalRegistros,
+            total: resp.totalActivos,
             usuarios
           };
         })
       )
 
+  };
+
+  eliminarUsuario = (uid: string) => {
+
+    const url = `${baseUrlU}/${uid}`;
+    return this.http.delete(url, this.headers);
   };
 
 };

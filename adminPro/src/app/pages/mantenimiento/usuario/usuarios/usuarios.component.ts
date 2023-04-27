@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 /* SERVICIOS */
 import { BusquedaService } from '../../../../services/busquedas/busqueda.service';
@@ -73,6 +74,33 @@ export class UsuariosComponent implements OnInit {
         next: (resultados: any) => this.usuarios = resultados
       });
     return true;
+  };
+
+  eliminarUsuario = (usuario: Usuario) => {
+    Swal.fire({
+      title: `¿Está seguro de borrar a ${usuario.nombre}? `,
+      text: "No podrá revertir esta acción",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.usuarioS.eliminarUsuario(usuario.uid || '')
+          .subscribe({
+            next: (resp: any) => {
+              Swal.fire(
+                'Eliminado!',
+                `${usuario.nombre} fue eliminado correctamente`,
+                'success'
+              );
+              this.cargarUsuario();
+            }
+          });
+      };
+    });
   };
 
 };

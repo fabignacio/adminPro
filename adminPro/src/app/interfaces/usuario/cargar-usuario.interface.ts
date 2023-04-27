@@ -1,6 +1,6 @@
 import { Usuario } from '../../models/usuarios/usuario.model';
 
 export interface CargarUsuario {
-    totalRegistros: number;
+    totalActivos: number;
     usuarios: Usuario[]
 };
