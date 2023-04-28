@@ -17,16 +17,17 @@ export class Usuario {
 
     get imagenUrl() {
 
+        let urlImagen: string = ''
+
         if (!this.img) {
-            return `${this._baseUrl}/usuarios/no-image`;
+            urlImagen = `${this._baseUrl}/usuarios/no-image`;
         } else if (this.img) {
 
-            if (this.img?.includes('https')) { return this.img; };
+            if (this.img?.includes('https')) { return urlImagen; };
 
-            return `${this._baseUrl}/usuarios/${this.img}`;
-
-        } else {
-            return false;
+            urlImagen = `${this._baseUrl}/usuarios/${this.img}`;
         };
+
+        return urlImagen;
     };
 };

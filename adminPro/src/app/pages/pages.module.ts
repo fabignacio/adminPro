@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /* MODULOS PERSONALIZADOS */
 import { ComponentsModule } from '../components/components.module';
 import { SharedModule } from '../shared/shared.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 /* COMPONENTES */
 import { AccountSettingsComponent } from './menu/account-settings/account-settings.component';
@@ -48,6 +49,7 @@ import { MedicosComponent } from './mantenimiento/medico/medicos.component';
     ReactiveFormsModule,
     ComponentsModule,
     SharedModule,
+    PipesModule
   ],
 })
 export class PagesModule { }
