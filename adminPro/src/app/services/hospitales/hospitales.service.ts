@@ -8,6 +8,9 @@ import { environment } from '../../../environments/environment';
 /* MODELO */
 import { Hospital } from '../../models/hospital/hospital.model';
 
+/* INTERFACE */
+import { CargarHospitales } from './../../interfaces/hospital/cargar-hospitales.interface';
+
 const baseUrl: string = environment.URL_BACKEND_HOSPITALES;
 
 @Injectable({
@@ -29,15 +32,35 @@ export class HospitalesService {
     };
   };
 
-  cargarHospitales = () => {
+  cargarHospitales = (desde: number = 0) => {
 
-    const url = `${baseUrl}/activos/`
-
-    return this.http.get(url, this.headers)
+    const url = `${baseUrl}/activos/?desde=${desde}`
+    return this.http.get<CargarHospitales>(url, this.headers)
       .pipe(
-        map((resp: { ok: boolean, hospitales: Hospital[] }) => resp.hospitales)
-      )
+        map(resp => {
+          const hospitales = resp.hospitales.map(hospital => new Hospital(
+            hospital.nombre, hospital.estado, hospital.uid, hospital.usuario, hospital.img
+          ));
 
+          return { total: resp.totalActivos, hospitales };
+        })
+      );
   };
+
+  crearHospital = (nombre: string) => {
+    const url = `${baseUrl}/`
+    return this.http.post(url, { nombre }, this.headers);
+  };
+
+  actualizarHospital = (uid: string, nombre: string) => {
+    const url = `${baseUrl}/${uid}`
+    return this.http.put(url, { nombre }, this.headers);
+  };
+
+  eliminarHospital = (uid: string) => {
+    const url = `${baseUrl}/${uid}`
+    return this.http.delete(url, this.headers);
+  };
+
 
 }

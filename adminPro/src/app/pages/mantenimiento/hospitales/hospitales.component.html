@@ -21,9 +21,25 @@
 <div class="row" *ngIf="!cargando">
     <div class="col-12">
         <div class="card">
+
             <div class="card-body">
-                <h4 class="card-title">Hospitales {{hospitales.length}}</h4>
-                <h6 class="card-subtitle">Hospitales registrados</h6>
+
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="card-title">Hospitales {{totalHospitales}}</h4>
+                        <h6 class="card-subtitle">Hospitales registrados</h6>
+                    </div>
+                    <div class="col">
+                        <div class="text-right">
+                            <button class="btn btn-primary" (click)="abrirSweetAlert()">
+                                <i class="fa fa-hospital-o"></i>
+                                Crear Hospital
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -43,20 +59,25 @@
                                     <input type="text" class="form-control" placeholder="Nombre del Hospital"
                                         [(ngModel)]="hospital.nombre" />
                                 </td>
-                                <td class=" text-nowrap text-center">
-                                    <a href="#" data-toggle="tooltip" data-original-title="Guardar Cambios"> <i
-                                            class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Borrar"> <i
-                                            class="fa fa-close text-danger"></i> </a>
+                                <td class="text-nowrap text-center w100">
+                                    <a data-toggle="tooltip" data-original-title="Guardar Cambios" class="cursor"
+                                        (click)="guardarCambios(hospital)">
+                                        <i class="fa fa-pencil text-inverse m-r-10"></i>
+                                    </a>
+
+                                    <a data-toggle="tooltip" data-original-title="Borrar" class="cursor"
+                                        (click)="eliminarHospital(hospital)">
+                                        <i class="fa fa-close text-danger"></i>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- <button class="btn btn-siguiente">Anterior</button>
+                <button class="btn btn-primary" (click)="cambiarPagina(-5)">Anterior</button>
                 &nbsp;
-                <button class="btn btn-siguiente">Siguiente</button> -->
+                <button class=" btn btn-primary" (click)="cambiarPagina(+5)">Siguiente</button>
             </div>
         </div>
     </div>

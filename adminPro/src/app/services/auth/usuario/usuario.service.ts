@@ -115,10 +115,7 @@ export class UsuarioService {
             user.nombre, user.email, user.estado, '', user.img, user.google, user.role, user.uid
           ));
 
-          return {
-            total: resp.totalActivos,
-            usuarios
-          };
+          return { total: resp.totalActivos, usuarios };
         })
       )
 
