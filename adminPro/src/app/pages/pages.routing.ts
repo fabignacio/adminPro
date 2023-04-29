@@ -18,6 +18,7 @@ import { UsuariosComponent } from './mantenimiento/usuario/usuarios/usuarios.com
 import { PerfilComponent } from './mantenimiento/usuario/perfil/perfil.component';
 import { HospitalesComponent } from './mantenimiento/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimiento/medico/medicos.component';
+import { ActualizarComponent } from './mantenimiento/medico/actualizar/actualizar.component';
 
 const routes: Routes = [
     {
@@ -37,9 +38,10 @@ const routes: Routes = [
 
             /* MANTENIMIENTO */
             { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de Usuario' } },
-            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios de Aplicacion' } },
-            { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Hospitales' } },
-            { path: 'medicos', component: MedicosComponent, data: { titulo: 'Medicos' } },
+            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de Usuarios' } },
+            { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales' } },
+            { path: 'medicos', component: MedicosComponent, data: { titulo: 'Mantenimiento de Medicos' } },
+            { path: 'medico/:id', component: ActualizarComponent, data: { titulo: 'Editar Medico' } },
         ]
     },
 ];
