@@ -71,14 +71,12 @@ export class UsuariosComponent implements OnInit {
 
   buscar = (termino: string) => {
 
-    if (termino.trim.length === 0) {
+    if (termino.trim().length === 0) {
       return this.usuarios = [...this.usuariosTemp];
     }
 
     this.busquedaService.buscar('usuarios', termino)
-      .subscribe({
-        next: (resultados: any) => this.usuarios = resultados
-      });
+      .subscribe({ next: (resultados: any) => this.usuarios = resultados });
     return true;
   };
 

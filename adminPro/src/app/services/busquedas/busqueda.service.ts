@@ -7,6 +7,7 @@ import { map } from 'rxjs';
 
 /* MODELO */
 import { Usuario } from '../../models/usuarios/usuario.model';
+import { Hospital } from '../../models/hospital/hospital.model';
 
 const Baseurl: string = environment.URL_BACKEND_BUSQUEDA;
 
@@ -38,10 +39,15 @@ export class BusquedaService {
       ));
   };
 
+  private transformarHospitales(resultados: any[]): Hospital[] {
+    return resultados.map(hospital => new Hospital(
+      hospital.nombre, hospital.estado, hospital.uid, hospital.usuario, hospital.img));
+  };
+
   buscar =
     (
-      tipo: 'usuarios' | 'medicos' | 'hospitales'
-      , terminoBusqueda: string = ''
+      tipo: 'usuarios' | 'medicos' | 'hospitales',
+      terminoBusqueda: string = ''
     ) => {
 
       const url: string = `${Baseurl}/coleccion/${tipo}/${terminoBusqueda}`
@@ -52,6 +58,8 @@ export class BusquedaService {
             switch (tipo) {
               case 'usuarios':
                 return this.transformarUsuarios(resp.resultado);
+              case 'hospitales':
+                return this.transformarHospitales(resp.resultado);
 
               default:
                 return [];

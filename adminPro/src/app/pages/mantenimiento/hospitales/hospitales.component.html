@@ -2,7 +2,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input type="text" class="form-control" placeholder="Buscar Hospital...">
+                <input type="text" class="form-control" placeholder="Buscar hospital..." #txtBusqueda
+                    (keyup)="buscar(txtBusqueda.value)">
             </div>
         </div>
     </div>
@@ -53,7 +54,7 @@
                             <tr *ngFor="let hospital of hospitales">
                                 <td class="text-center">
                                     <img [src]="hospital.img | imagen:'hospitales'" alt="hospital.nombre"
-                                        class="avatar cursor">
+                                        class="avatar cursor" (click)="abrirModal(hospital)">
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" placeholder="Nombre del Hospital"
@@ -75,9 +76,11 @@
                     </table>
                 </div>
 
-                <button class="btn btn-primary" (click)="cambiarPagina(-5)">Anterior</button>
-                &nbsp;
-                <button class=" btn btn-primary" (click)="cambiarPagina(+5)">Siguiente</button>
+                <div *ngIf="txtBusqueda.value.trim.length === 0">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-primary">Anterior</button>
+                    &nbsp;
+                    <button (click)="cambiarPagina(+5)" class="btn btn-primary">Siguiente</button>
+                </div>
             </div>
         </div>
     </div>

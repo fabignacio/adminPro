@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
-/* SERVICIO */
+/* SERVICIOS */
+import { BusquedaService } from './../../../services/busquedas/busqueda.service';
 import { HospitalesService } from '../../../services/hospitales/hospitales.service';
+import { ModalImagenService } from './../../../services/modalImagen/modal-imagen.service';
 
 /* MODELO */
 import { Hospital } from '../../../models/hospital/hospital.model';
@@ -22,7 +24,9 @@ export class HospitalesComponent implements OnInit {
   public totalHospitales: number = 0;
 
   constructor(
-    private hospitalS: HospitalesService
+    private busquedaService: BusquedaService,
+    private hospitalS: HospitalesService,
+    private modalService: ModalImagenService,
   ) {
 
   };
@@ -30,6 +34,7 @@ export class HospitalesComponent implements OnInit {
   ngOnInit(): void {
     this.cargarHospitales();
 
+    this.modalService.nuevaImagen.subscribe(img => this.cargarHospitales());
   };
 
   cambiarPagina = (valor: number) => {
@@ -42,6 +47,17 @@ export class HospitalesComponent implements OnInit {
     };
 
     this.cargarHospitales();
+  };
+
+  buscar = (termino: string) => {
+
+    if (termino.trim().length === 0) {
+      return this.hospitales = [...this.hospitalesTemp];
+    }
+
+    this.busquedaService.buscar('hospitales', termino)
+      .subscribe({ next: (resultados: any) => this.hospitales = resultados });
+    return true;
   };
 
   cargarHospitales = () => {
@@ -101,7 +117,7 @@ export class HospitalesComponent implements OnInit {
 
   async abrirSweetAlert() {
 
-    const { value } = await Swal.fire<string>({
+    const { value = '' } = await Swal.fire<string>({
       title: 'Crear hospital',
       input: 'text',
       inputLabel: 'Ingrese nombre del nuevo hospital',
@@ -121,6 +137,13 @@ export class HospitalesComponent implements OnInit {
         });
 
     };
+  };
+
+  abrirModal = (hospital: Hospital) => {
+    const uid: string = hospital.uid || '';
+    const img: string = hospital.img || '';
+
+    this.modalService.abrirModal('hospitales', uid, img);
   };
 
 };
