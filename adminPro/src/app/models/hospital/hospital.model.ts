@@ -13,5 +13,4 @@ export class Hospital {
         public usuario?: _HospitalUser,
         public img?: string,
     ) { }
-
 };

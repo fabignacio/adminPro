@@ -34,7 +34,7 @@ export class HospitalesService {
 
   cargarHospitales = (desde: number = 0) => {
 
-    const url = `${baseUrl}/activos/?desde=${desde}`
+    const url: string = `${baseUrl}/activos/?desde=${desde}`
     return this.http.get<CargarHospitales>(url, this.headers)
       .pipe(
         map(resp => {
@@ -45,6 +45,11 @@ export class HospitalesService {
           return { total: resp.totalActivos, hospitales };
         })
       );
+  };
+
+  cargasHospitalesResumido = () => {
+    const url: string = `${baseUrl}/activos/todos`;
+    return this.http.get<CargarHospitales>(url, this.headers);
   };
 
   crearHospital = (nombre: string) => {

@@ -48,18 +48,23 @@
                                 <th class="w100">Avatar</th>
                                 <th>Nombre</th>
                                 <th>Hospital</th>
+                                <th>Foto Hospital</th>
                                 <th>Estado</th>
                                 <th class="text-nowrap">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let medico of medicos">
-                                <td class="text-center">
+                                <td class="text-center w100">
                                     <img [src]=" medico.img | imagen:'medicos'" alt="medico.nombre"
                                         class="avatar cursor" (click)="abrirModal(medico)">
                                 </td>
                                 <td>{{medico.nombre}}</td>
                                 <td>{{medico.hospital.nombre}}</td>
+                                <td class="text-center w100">
+                                    <img [src]=" medico.hospital.img | imagen:'hospitales'" alt="hospital.nombre"
+                                        class="avatar">
+                                </td>
                                 <td class="w100">
                                     <span class="label label-danger" *ngIf="!medico.estado">Inactivo</span>
                                     <span class="label label-info" *ngIf="medico.estado">Activo</span>
