@@ -4,6 +4,7 @@ declare function customInitFunctions(): void;
 
 /*SERVICIO */
 import { SettingsService } from '../services/setting/settings.service';
+import { SidebarService } from '../services/sidebar/sidebar.service';
 
 @Component({
   selector: 'app-pages',
@@ -13,10 +14,15 @@ import { SettingsService } from '../services/setting/settings.service';
 })
 export class PagesComponent {
 
-  constructor(private settingService: SettingsService) { }
+  constructor(
+    private settingService: SettingsService,
+    private sideBarService: SidebarService
+  ) { }
 
   ngOnInit(): void {
     customInitFunctions();
+    this.sideBarService.cargarMenu();
   }
 
-}
+};
+

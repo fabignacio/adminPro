@@ -75,7 +75,7 @@ export class LoginComponent implements AfterViewInit {
           next: (resp) => {
 
             this.ngZone.run(() => {
-              this.router.navigateByUrl('/');
+              this.router.navigateByUrl(`/dashboard`);
             });
 
           },
@@ -96,7 +96,7 @@ export class LoginComponent implements AfterViewInit {
           }
 
           // Navegar al Dashboard
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl(`/dashboard`);
         },
         error: (err: any) => { Swal.fire('Error', err.error.msg, 'error'); }
       });

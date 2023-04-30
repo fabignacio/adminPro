@@ -31,7 +31,7 @@ export class UsuarioService {
   ) { };
 
   get token(): string {
-    return sessionStorage.getItem('token') || '';
+    return localStorage.getItem('token') || '';
   };
 
   get uid(): string {
@@ -46,12 +46,20 @@ export class UsuarioService {
     };
   };
 
+  guardarLocalStorage = (token: string, menu: any) => {
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify(menu));
+  };
+
+  /* METODOS DE GOOGLE */
+
   googleInit(google?: any) {
     this.logout(google)
   };
 
   logout(google: any) {
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
+    localStorage.removeItem('menu');
 
     google.accounts.id.revoke('fa.alarconm@duocuc.cl', (done: any) => {
       this.ngZone.run(() => {
@@ -60,43 +68,44 @@ export class UsuarioService {
     });
   };
 
-  login = (formData: LoginForm) => {
-    return this.http.post(baseUrl, formData)
-      .pipe((
-        tap((resp: any) => { sessionStorage.setItem('token', resp.token); })
-      ));
-  };
-
   loginGoogle = (token: string) => {
     return this.http.post(`${baseUrl}/google`, { token })
       .pipe(
-        tap((resp: any) => { sessionStorage.setItem('token', resp.token); })
+        tap((resp: any) => { this.guardarLocalStorage(resp.token, resp.menu) })
       );
+  };
+
+  /* FIN METODOS DE GOOGLE */
+
+  login = (formData: LoginForm) => {
+    return this.http.post(baseUrl, formData)
+      .pipe((
+        tap((resp: any) => { this.guardarLocalStorage(resp.token, resp.menu) })
+      ));
   };
 
   validarToken = (): Observable<boolean> => {
 
-    return this.http.get(`${baseUrl}/renew`, {
-      headers: {
-        'x-token': this.token
-      }
-    })
+    return this.http.get(`${baseUrl}/renew`, this.headers)
       .pipe(
         map((resp: any) => {
           const { nombre, email, estado, img = '', google, role, uid } = resp.usuario
 
           this.usuario = new Usuario(nombre, email, estado, '', img, google, role, uid);
-          sessionStorage.setItem('token', resp.token);
+          this.guardarLocalStorage(resp.token, resp.menu);
           return true;
         }),
         catchError((err: any) => of(false))
       );
   };
 
+  /* METODOS DE USUARIO */
+
   crearUsuario = (formData: RegisterForm) => {
     return this.http.post(baseUrlU, formData)
       .pipe((
-        tap((resp: any) => { sessionStorage.setItem('token', resp.token); }) /* GUARDAMOS EL TOKEN EN EL SESSION STORAGE */
+        tap((resp: any) => { this.guardarLocalStorage(resp.token, resp.menu); }) /* GUARDAMOS EL TOKEN EN EL LOCAL STORAGE */
+
       ));
   };
 
