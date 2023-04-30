@@ -1,0 +1,124 @@
+<div class="row animated fadeIn fast">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="alert alert-info" *ngIf="usuarios.length === 0">
+                    <p class="mb-o">No hay usuarios con ese termino de busqueda</p>
+                </div>
+
+                <h3 class="text-center">Usuarios</h3>
+
+                <div class="table-responsive" *ngIf="usuarios.length > 1 ">
+                    <table class="tablesaw table-bordered table-hover table tablesaw-swipe tablesaw-sortable"
+                        data-tablesaw-mode="swipe" data-tablesaw-sortable="" data-tablesaw-sortable-switch=""
+                        data-tablesaw-minimap="" data-tablesaw-mode-switch="" id="table-6797">
+                        <thead>
+                            <tr>
+                                <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="persist"
+                                    class="tablesaw-cell-persist tablesaw-sortable-head" data-sortable-numeric="false">
+                                    Nombre
+                                </th>
+                                <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="2"
+                                    class="tablesaw-sortable-head" data-sortable-numeric="">Avatar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let usuarios of usuarios">
+                                <td>{{usuarios.nombre}}</td>
+                                <td>
+                                    <img [src]="usuarios.img | imagen:'usuarios'" alt="usuarios.nombre" class="avatar">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="alert alert-info" *ngIf="hospitales.length === 0">
+                    <p class="mb-o">No hay hospitales con ese termino de busqueda</p>
+                </div>
+
+                <h3 class="text-center">Hospitales</h3>
+
+                <div class="table-responsive" *ngIf="hospitales.length > 1 ">
+                    <table class="tablesaw table-bordered table-hover table tablesaw-swipe tablesaw-sortable"
+                        data-tablesaw-mode="swipe" data-tablesaw-sortable="" data-tablesaw-sortable-switch=""
+                        data-tablesaw-minimap="" data-tablesaw-mode-switch="" id="table-6797">
+                        <thead>
+                            <tr>
+                                <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="persist"
+                                    class="tablesaw-cell-persist tablesaw-sortable-head" data-sortable-numeric="false">
+                                    Nombre
+                                </th>
+                                <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="2"
+                                    class="tablesaw-sortable-head" data-sortable-numeric="">Avatar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hospitales of hospitales">
+                                <td>{{hospitales.nombre}}</td>
+                                <td>
+                                    <img [src]="hospitales.img | imagen:'hospitales'" alt="hospitales.nombre"
+                                        class="avatar">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="alert alert-info" *ngIf="medicos.length === 0">
+                    <p class="mb-o">No hay médicos con ese termino de busqueda</p>
+                </div>
+
+                <h3 class="text-center">Médicos</h3>
+
+                <div class="table-responsive" *ngIf="medicos.length > 1 ">
+                    <table class="tablesaw table-bordered table-hover table tablesaw-swipe tablesaw-sortable"
+                        data-tablesaw-mode="swipe" data-tablesaw-sortable="" data-tablesaw-sortable-switch=""
+                        data-tablesaw-minimap="" data-tablesaw-mode-switch="" id="table-6797">
+                        <thead>
+                            <tr>
+                                <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="persist"
+                                    class="tablesaw-cell-persist tablesaw-sortable-head" data-sortable-numeric="false">
+                                    Nombre
+                                </th>
+                                <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="2"
+                                    class="tablesaw-sortable-head" data-sortable-numeric="">Avatar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let medicos of medicos">
+                                <td>
+                                    <a [routerLink]="['/dashboard/medico', medicos.uid]" class="cursor">
+                                        {{medicos.nombre}}
+                                    </a>
+                                </td>
+                                <td>
+                                    <img [src]="medicos.img | imagen:'medicos'" alt="medicos.nombre" class="avatar">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -16,6 +16,7 @@ import { Grafica1Component } from './menu/grafica1/grafica1.component';
 import { ProgressComponent } from './menu/progress/progress.component';
 import { PromesasComponent } from './menu/promesas/promesas.component';
 import { RxjsComponent } from './menu/rxjs/rxjs.component';
+import { BusquedaComponent } from './menu/busqueda/busqueda.component';
 
 /* MANTENIMIENTO */
 import { PerfilComponent } from './mantenimiento/usuario/perfil/perfil.component';
@@ -37,7 +38,8 @@ import { ActualizarComponent } from './mantenimiento/medico/actualizar/actualiza
     UsuariosComponent,
     HospitalesComponent,
     MedicosComponent,
-    ActualizarComponent
+    ActualizarComponent,
+    BusquedaComponent
   ],
   exports: [
     AccountSettingsComponent,

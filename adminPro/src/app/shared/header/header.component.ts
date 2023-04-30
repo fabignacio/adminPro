@@ -11,6 +11,7 @@ import { Usuario } from './../../models/usuarios/usuario.model';
 
 /* VARIABLES DE ENTORNO */
 import { environment } from './../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +25,9 @@ export class HeaderComponent {
   private readonly _client_id: string = environment.CLIENT_ID;
   public usuario: Usuario;
 
-  constructor(private loginS: UsuarioService) {
+  constructor(
+    private loginS: UsuarioService,
+    private router: Router) {
     this.usuario = loginS.usuario;
   };
 
@@ -35,6 +38,15 @@ export class HeaderComponent {
     });
 
     this.loginS.logout(google);
+  };
+
+  buscar = (termino: string) => {
+
+    if (termino.trim().length > 0) {
+      this.router.navigateByUrl(`dashboard/buscar/${termino}`);
+    } else {
+      return;
+    };
   };
 
 };
