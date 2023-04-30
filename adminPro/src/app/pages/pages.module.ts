@@ -10,8 +10,8 @@ import { PipesModule } from '../pipes/pipes.module';
 
 /* COMPONENTES */
 import { AccountSettingsComponent } from './menu/account-settings/account-settings.component';
-import { DashboardComponent } from './menu/dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
+import { DashboardComponent } from './menu/dashboard/dashboard.component';
 import { Grafica1Component } from './menu/grafica1/grafica1.component';
 import { ProgressComponent } from './menu/progress/progress.component';
 import { PromesasComponent } from './menu/promesas/promesas.component';

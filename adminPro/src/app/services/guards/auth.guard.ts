@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 /* SERVICIO */
 import { UsuarioService } from '../usuario/usuario.service';
@@ -16,7 +16,14 @@ export class AuthGuard {
     private router: Router
   ) { }
 
-  canActivate() {
+  canLoad(): Observable<boolean> {
+    return this.token.validarToken()
+      .pipe(
+        tap(isAuth => { if (!isAuth) { this.router.navigateByUrl('/login'); }; })
+      );
+  };
+
+  canActivate(): Observable<boolean> {
     return this.token.validarToken()
       .pipe(
         tap(isAuth => { if (!isAuth) { this.router.navigateByUrl('/login'); }; })
