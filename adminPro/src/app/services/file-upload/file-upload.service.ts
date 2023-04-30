@@ -26,7 +26,7 @@ export class FileUploadService {
       const resp = await fetch(url, {
         method: 'post',
         headers: {
-          'x-token': sessionStorage.getItem('token') || ''
+          'x-token': localStorage.getItem('token') || ''
         },
         body: formData
       });
@@ -36,7 +36,6 @@ export class FileUploadService {
       if (data.ok) {
         return data.nombreArchivo;
       } else {
-        console.log(data.msg);
         return false;
       };
 
