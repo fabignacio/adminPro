@@ -4,7 +4,8 @@ import Swal from 'sweetalert2';
 /* SERVICIOS */
 import { BusquedaService } from '../../../../services/busquedas/busqueda.service';
 import { ModalImagenService } from '../../../../services/modalImagen/modal-imagen.service';
-import { UsuarioService } from '../../../../services/auth/usuario/usuario.service';
+import { UsuarioService } from '../../../../services/usuario/usuario.service';
+
 
 /* MODELO */
 import { Usuario } from '../../../../models/usuarios/usuario.model';

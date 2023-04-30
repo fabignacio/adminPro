@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 /* SERVICIOS */
 import { ValidatorsService } from '../../services/validators/validators.service';
-import { UsuarioService } from './../../services/auth/usuario/usuario.service';
+import { UsuarioService } from '../../services/usuario/usuario.service';
 
 /* INTERFACE */
 import { RegisterForm } from '../../interfaces/usuario/register-form.interface';

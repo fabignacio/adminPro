@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 declare const google: any;
 
 /* SERVICIO */
-import { UsuarioService } from '../../services/auth/usuario/usuario.service';
+import { UsuarioService } from '../../services/usuario/usuario.service';
 
 /* MODELO */
 import { Usuario } from './../../models/usuarios/usuario.model';

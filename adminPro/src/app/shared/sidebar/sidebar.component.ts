@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 /* SERVICIOS */
 import { SidebarService } from '../../services/sidebar/sidebar.service';
-import { UsuarioService } from './../../services/auth/usuario/usuario.service';
+import { UsuarioService } from '../../services/usuario/usuario.service';
 
 /* MODELO */
 import { Usuario } from './../../models/usuarios/usuario.model';

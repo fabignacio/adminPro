@@ -2,7 +2,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 /*SERVICIO GUARD */
-import { AuthGuard } from '../services/auth/guards/auth.guard';
+import { AuthGuard } from '../services/guards/auth.guard';
+import { AdminGuard } from '../services/guards/admin.guard';
 
 /* COMPONENTES DASHBOARD */
 import { AccountSettingsComponent } from './menu/account-settings/account-settings.component';
@@ -39,11 +40,18 @@ const routes: Routes = [
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 
             /* MANTENIMIENTO */
-            { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de Usuario' } },
-            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de Usuarios' } },
             { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales' } },
             { path: 'medicos', component: MedicosComponent, data: { titulo: 'Mantenimiento de Medicos' } },
             { path: 'medico/:id', component: ActualizarComponent, data: { titulo: 'Editar Medico' } },
+            { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de Usuario' } },
+
+            /* RUTAS DEL ADMIN_ROLE */
+            {
+                path: 'usuarios',
+                canActivate: [AdminGuard],
+                component: UsuariosComponent,
+                data: { titulo: 'Mantenimiento de Usuarios' }
+            },
         ]
     },
 ];

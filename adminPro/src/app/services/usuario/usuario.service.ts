@@ -3,15 +3,15 @@ import { Injectable, NgZone } from '@angular/core';
 import { Observable, catchError, delay, map, of, tap } from 'rxjs';
 
 /*INTERFACE */
-import { LoginForm } from '../../../interfaces/usuario/login-form.interface';
-import { RegisterForm } from './../../../interfaces/usuario/register-form.interface';
-import { CargarUsuario } from './../../../interfaces/usuario/cargar-usuario.interface';
+import { LoginForm } from '../../interfaces/usuario/login-form.interface';
+import { RegisterForm } from '../../interfaces/usuario/register-form.interface';
+import { CargarUsuario } from '../../interfaces/usuario/cargar-usuario.interface';
 
 /* MODELO */
-import { Usuario } from '../../../models/usuarios/usuario.model';
+import { Usuario } from '../../models/usuarios/usuario.model';
 
 /* ENVIROMENT */
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 
 const baseUrl: string = environment.URL_BACKEND_LOGIN;
@@ -30,6 +30,8 @@ export class UsuarioService {
     private ngZone: NgZone
   ) { };
 
+  /* GETTERS */
+
   get token(): string {
     return localStorage.getItem('token') || '';
   };
@@ -45,6 +47,12 @@ export class UsuarioService {
       }
     };
   };
+
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.usuario.role;
+  };
+
+  /* FIN GETTERS */
 
   guardarLocalStorage = (token: string, menu: any) => {
     localStorage.setItem('token', token);
